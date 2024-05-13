@@ -15,3 +15,5 @@ dependencies:
   crypto: ">=3.0.0 <5.0.0"
   # https://github.com/dart-lang/convert
   convert: ">=3.0.0 <5.0.0"
+  # 日志记录
+  logger: ^2.3.0

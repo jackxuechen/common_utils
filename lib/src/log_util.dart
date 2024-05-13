@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'package:logger/logger.dart';
 
 /**
  * @Author: Sky24n
@@ -11,7 +11,9 @@ import 'dart:developer';
 class LogUtil {
   static const String _defTag = 'common_utils';
   static bool _debugMode = false; //是否是debug模式,true: log v 不输出.
-  static int _maxLen = 128;
+
+  static var logger = Logger();
+
   static String _tagValue = _defTag;
 
   static void init({
@@ -21,44 +23,32 @@ class LogUtil {
   }) {
     _tagValue = tag;
     _debugMode = isDebug;
-    _maxLen = maxLen;
   }
 
   static void d(Object? object, {String? tag}) {
     if (_debugMode) {
-      log('$tag d | ${object?.toString()}');
+      if (tag?.isNotEmpty == true) {
+        logger.d("tag->$tag");
+      }
+      logger.d(object);
     }
   }
 
   static void e(Object? object, {String? tag}) {
-    _printLog(tag, ' e ', object);
+    if (_debugMode) {
+      if (tag?.isNotEmpty == true) {
+        logger.e("tag->$tag");
+      }
+      logger.e(object);
+    }
   }
 
   static void v(Object? object, {String? tag}) {
     if (_debugMode) {
-      _printLog(tag, ' v ', object);
-    }
-  }
-
-  static void _printLog(String? tag, String stag, Object? object) {
-    String da = object?.toString() ?? 'null';
-    tag = tag ?? _tagValue;
-    if (da.length <= _maxLen) {
-      print('$tag$stag $da');
-      return;
-    }
-    print(
-        '$tag$stag — — — — — — — — — — — — — — — — st — — — — — — — — — — — — — — — —');
-    while (da.isNotEmpty) {
-      if (da.length > _maxLen) {
-        print('$tag$stag| ${da.substring(0, _maxLen)}');
-        da = da.substring(_maxLen, da.length);
-      } else {
-        print('$tag$stag| $da');
-        da = '';
+      if (tag?.isNotEmpty == true) {
+        logger.i("tag->$tag");
       }
+      logger.i(object);
     }
-    print(
-        '$tag$stag — — — — — — — — — — — — — — — — ed — — — — — — — — — — — — — — — —');
   }
 }
