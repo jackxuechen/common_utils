@@ -12,17 +12,20 @@ class LogUtil {
   static const String _defTag = 'common_utils';
   static bool _debugMode = false; //是否是debug模式,true: log v 不输出.
 
-  static var logger = Logger();
+  static Logger logger = Logger();
 
   static String _tagValue = _defTag;
 
   static void init({
     String tag = _defTag,
     bool isDebug = false,
-    int maxLen = 128,
+    PrettyPrinter? printer,
   }) {
     _tagValue = tag;
     _debugMode = isDebug;
+    if (printer != null) {
+      logger = Logger(printer: printer);
+    }
   }
 
   static void d(Object? object, {String? tag}) {
