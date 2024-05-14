@@ -30,28 +30,19 @@ class LogUtil {
 
   static void d(Object? object, {String? tag}) {
     if (_debugMode) {
-      if (tag?.isNotEmpty == true) {
-        logger.d("tag->$tag");
-      }
-      logger.d(object);
+      logger.d("${tag != null ? "tag->$tag\n" : ''}${object?.toString()}");
     }
   }
 
   static void e(Object? object, {String? tag}) {
     if (_debugMode) {
-      if (tag?.isNotEmpty == true) {
-        logger.e("tag->$tag");
-      }
-      logger.e(object);
+      logger.e("${tag != null ? "tag->$tag\n" : ''}${object?.toString()}");
     }
   }
 
   static void v(Object? object, {String? tag}) {
     if (_debugMode) {
-      if (tag?.isNotEmpty == true) {
-        logger.i("tag->$tag");
-      }
-      logger.i(object);
+      logger.i("${tag != null ? "tag->$tag\n" : ''}${object?.toString()}");
     }
   }
 }
